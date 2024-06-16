@@ -2,7 +2,7 @@
 Feature: SauceDemo
 
 @regression
-Scenario Outline: Test 1 - Confirm the user is taken to the products page
+Scenario Outline:Test_1-Confirm the user is taken to the products page
 	Given Login page is loaded
 	When Enter username as <USER_NAME> in login page
 	And Enter password in login page
@@ -14,7 +14,7 @@ Scenario Outline: Test 1 - Confirm the user is taken to the products page
 
 
 @regression
-Scenario Outline: Test 2 - Add 3 items to basket and buy 2 items
+Scenario Outline:  Test_2-Add 3 items to basket and buy 2 items
     Given Login page is loaded
 	When Enter username as <USER_NAME> in login page
 	And Enter password in login page

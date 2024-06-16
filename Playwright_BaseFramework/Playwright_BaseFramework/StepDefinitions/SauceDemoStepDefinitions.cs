@@ -1,3 +1,4 @@
+using Playwright_BaseFramework.Support;
 using TechTalk.SpecFlow;
 
 namespace Playwright_BaseFramework.StepDefinitions
@@ -5,6 +6,15 @@ namespace Playwright_BaseFramework.StepDefinitions
     [Binding]
     public sealed class SauceDemoStepDefinitions
     {
+        private ScenarioContext scenarioContext;
+        public PageObject pageObject;
+
+        public SauceDemoStepDefinitions(PageObject pageObject, ScenarioContext scenarioContext)
+        {
+            this.pageObject = pageObject;
+            this.scenarioContext = scenarioContext;
+        }
+
         [Given(@"Login page is loaded")]
         public void GivenLoginPageIsLoaded()
         {

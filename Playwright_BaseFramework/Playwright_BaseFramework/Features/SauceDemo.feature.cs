@@ -77,10 +77,10 @@ namespace Playwright_BaseFramework.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test 1 - Confirm the user is taken to the products page")]
+        [NUnit.Framework.DescriptionAttribute("Test_1-Confirm the user is taken to the products page")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Standard_User", null)]
-        public virtual void Test1_ConfirmTheUserIsTakenToTheProductsPage(string uSER_NAME, string[] exampleTags)
+        public virtual void Test_1_ConfirmTheUserIsTakenToTheProductsPage(string uSER_NAME, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -91,7 +91,7 @@ namespace Playwright_BaseFramework.Features
             string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("USER_NAME", uSER_NAME);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test 1 - Confirm the user is taken to the products page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_1-Confirm the user is taken to the products page", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -132,10 +132,10 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test 2 - Add 3 items to basket and buy 2 items")]
+        [NUnit.Framework.DescriptionAttribute("Test_2-Add 3 items to basket and buy 2 items")]
         [NUnit.Framework.CategoryAttribute("regression")]
         [NUnit.Framework.TestCaseAttribute("Standard_User", "Backpack,Bolt T-Shirt,Bike Light", "Bolt T-Shirt", "rohit", "saraswat", "282007", null)]
-        public virtual void Test2_Add3ItemsToBasketAndBuy2Items(string uSER_NAME, string pRODUCTS, string pRODUCT, string fIRST_NAME, string lAST_NAME, string pOSTAL_CODE, string[] exampleTags)
+        public virtual void Test_2_Add3ItemsToBasketAndBuy2Items(string uSER_NAME, string pRODUCTS, string pRODUCT, string fIRST_NAME, string lAST_NAME, string pOSTAL_CODE, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "regression"};
@@ -151,7 +151,7 @@ this.ScenarioInitialize(scenarioInfo);
             argumentsOfScenario.Add("FIRST_NAME", fIRST_NAME);
             argumentsOfScenario.Add("LAST_NAME", lAST_NAME);
             argumentsOfScenario.Add("POSTAL_CODE", pOSTAL_CODE);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test 2 - Add 3 items to basket and buy 2 items", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_2-Add 3 items to basket and buy 2 items", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
