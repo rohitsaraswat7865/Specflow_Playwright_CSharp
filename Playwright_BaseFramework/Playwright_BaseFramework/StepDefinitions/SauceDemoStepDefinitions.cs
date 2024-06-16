@@ -1,6 +1,7 @@
 using Microsoft.Playwright;
 using NUnit.Framework.Constraints;
 using Playwright_BaseFramework.Support;
+using System.IO;
 using TechTalk.SpecFlow;
 
 namespace Playwright_BaseFramework.StepDefinitions
@@ -24,8 +25,9 @@ namespace Playwright_BaseFramework.StepDefinitions
             {
                 await this.pageObject.Page.GotoAsync("https://www.saucedemo.com/", new()
                 {
-                    Timeout = 0 
+                    Timeout = 40_000
                 });
+
             }
             catch (Exception ex)
             {
@@ -35,7 +37,7 @@ namespace Playwright_BaseFramework.StepDefinitions
         }
 
         [When(@"Enter username as (.*) in login page")]
-        public async Task WhenEnterUsernameAsStandard_UserInLoginPage(string userName)
+        public async Task WhenEnterUsernameInLoginPage(string userName)
         {
             try
             {
@@ -84,6 +86,11 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
+                await this.pageObject.Page.WaitForURLAsync("**/inventory.html", new()
+                {
+                    WaitUntil = WaitUntilState.DOMContentLoaded,
+                    Timeout = 15_000
+                });
                 await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"title\"]")).ToBeVisibleAsync(new()
                 {
                     Timeout = 30_000,
@@ -100,12 +107,26 @@ namespace Playwright_BaseFramework.StepDefinitions
             }
         }
 
-        [When(@"Select following Backpack,Bolt T-Shirt,Bike Light in product page")]
-        public async Task WhenSelectFollowingBackpackBoltT_ShirtBikeLightInProductPage()
+        [When(@"Select following (.*) in product page")]
+        public async Task WhenSelectFollowingProductsInProductPage(string productNameList)
         {
             try
             {
-               
+                var arr = productNameList.Split(",");
+                var count = arr.Length.ToString();
+                foreach(var productName in arr)
+                {
+                    await this.pageObject.Page.Locator($"xpath=//div[contains(text(),'{productName}')]/ancestor::div[@class='inventory_item_description']//div[@class='pricebar']/button", new()
+                    {
+                        HasText = "Add to cart"
+                    })
+                        .ClickAsync(new()
+                    {
+                        Button = MouseButton.Left,
+                        Timeout = 10_000
+                    });
+                }
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"shopping-cart-badge\"]")).ToContainTextAsync(count);
             }
             catch (Exception ex)
             {
@@ -118,7 +139,11 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"shopping-cart-link\"]")).ToBeVisibleAsync();
+                await this.pageObject.Page.Locator("[data-test=\"shopping-cart-link\"]").ClickAsync(new()
+                {
+                    Timeout = 10_000
+                });
             }
             catch (Exception ex)
             {
@@ -131,7 +156,16 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.WaitForURLAsync("**/cart.html", new()
+                {
+                    WaitUntil = WaitUntilState.DOMContentLoaded,
+                    Timeout = 10_000
+                });
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"secondary-header\"]")).ToBeVisibleAsync();
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"title\"]")).ToContainTextAsync("Your Cart", new()
+                {
+                    IgnoreCase = false //case sensitive
+                });
             }
             catch (Exception ex)
             {
@@ -139,12 +173,19 @@ namespace Playwright_BaseFramework.StepDefinitions
             }
         }
 
-        [When(@"Remove a Bolt T-Shirt from cart")]
-        public async Task WhenRemoveABoltT_ShirtFromCart()
+        [When(@"Remove a (.*) from cart")]
+        public async Task WhenRemoveProductNameFromCart(string productName)
         {
             try
             {
-
+                await this.pageObject.Page.Locator($"xpath=//div[contains(text(),'{productName}')]/ancestor::div[@class='cart_item_label']//button", new()
+                {
+                    HasText = "Remove"
+                })
+                    .ClickAsync(new()
+                {
+                    Delay = 3_000
+                });
             }
             catch (Exception ex)
             {
@@ -157,7 +198,12 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
+                await this.pageObject.Page.Locator("[data-test=\"checkout\"]").ClickAsync(new()
+                {
+                    Delay = 2_000,
+                    Timeout = 10_000
 
+                });
             }
             catch (Exception ex)
             {
@@ -170,7 +216,11 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.WaitForURLAsync("**/checkout-step-one.html", new()
+                {
+                    WaitUntil = WaitUntilState.DOMContentLoaded,
+                    Timeout = 10_000
+                });
             }
             catch (Exception ex)
             {
@@ -178,12 +228,17 @@ namespace Playwright_BaseFramework.StepDefinitions
             }
         }
 
-        [When(@"Provide user information rohit and saraswat and (.*)")]
-        public async Task WhenProvideUserInformationRohitAndSaraswatAnd(int p0)
+        [When(@"Provide user information ([a-z_A-Z]+) and ([a-z_A-Z]+) and ([0-9]+)")]
+        public async Task WhenProvideUserInformationFirstNameAndLastNameAndPinCode(string firstName,string lastName,string pinCode)
         {
             try
             {
-
+                await this.pageObject.Page.Locator("[data-test=\"firstName\"]").ClickAsync();
+                await this.pageObject.Page.Locator("[data-test=\"firstName\"]").FillAsync(firstName);
+                await this.pageObject.Page.Locator("[data-test=\"lastName\"]").ClickAsync();
+                await this.pageObject.Page.Locator("[data-test=\"lastName\"]").FillAsync(lastName);
+                await this.pageObject.Page.Locator("[data-test=\"postalCode\"]").ClickAsync();
+                await this.pageObject.Page.Locator("[data-test=\"postalCode\"]").FillAsync(pinCode);
             }
             catch (Exception ex)
             {
@@ -196,7 +251,15 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.Locator("[data-test=\"continue\"]", new()
+                {
+                    HasText = "Continue"
+                })
+                    .ClickAsync(new()
+                {
+                    Delay = 2_000
+                    
+                });
             }
             catch (Exception ex)
             {
@@ -209,7 +272,11 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.WaitForURLAsync("**/checkout-step-two.html", new()
+                {
+                    WaitUntil = WaitUntilState.DOMContentLoaded,
+                    Timeout = 10_000
+                });
             }
             catch (Exception ex)
             {
@@ -222,7 +289,14 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.Locator("[data-test=\"finish\"]", new()
+                {                 
+                    HasText = "Finish"
+                })
+                    .ClickAsync(new()
+                    {
+                        Timeout = 15_000
+                    });
             }
             catch (Exception ex)
             {
@@ -235,7 +309,13 @@ namespace Playwright_BaseFramework.StepDefinitions
         {
             try
             {
-
+                await this.pageObject.Page.WaitForURLAsync("**/checkout-complete.html", new()
+                {
+                    WaitUntil = WaitUntilState.DOMContentLoaded,
+                    Timeout = 20_000
+                });
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"pony-express\"]")).ToBeVisibleAsync();
+                await Assertions.Expect(this.pageObject.Page.Locator("[data-test=\"complete-header\"]")).ToContainTextAsync("Thank you for your order!");
             }
             catch (Exception ex)
             {

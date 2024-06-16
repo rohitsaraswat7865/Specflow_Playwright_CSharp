@@ -1,9 +1,11 @@
 ﻿@E2E
 Feature: SauceDemo
 
+Background: 
+    Given Login page is loaded
+
 @regression
-Scenario Outline:Test_1-Confirm the user is taken to the products page
-	Given Login page is loaded
+Scenario Outline:Test_1-Confirm the user is taken to the products page	
 	When Enter username as <USER_NAME> in login page
 	And Enter password in login page
 	And Click submit button in login page
@@ -15,8 +17,7 @@ Scenario Outline:Test_1-Confirm the user is taken to the products page
 
 @regression
 Scenario Outline:  Test_2-Add 3 items to basket and buy 2 items
-    Given Login page is loaded
-	When Enter username as <USER_NAME> in login page
+    When Enter username as <USER_NAME> in login page
 	And Enter password in login page
 	And Click submit button in login page
 	Then Product page is loaded
