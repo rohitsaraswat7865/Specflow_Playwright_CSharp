@@ -11,7 +11,7 @@
    
    4.2)  **.\playwright.ps1 install**
    
-5) **dotnet test --filter TestCategory=regression**
+5) **dotnet test --filter Category=regression**
    
 6) Open Playwright Trace Viewer:
    
