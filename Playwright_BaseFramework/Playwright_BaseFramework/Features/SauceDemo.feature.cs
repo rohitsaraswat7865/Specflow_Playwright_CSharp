@@ -79,7 +79,7 @@ namespace Playwright_BaseFramework.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Test_1-Confirm the user is taken to the products page")]
         [NUnit.Framework.CategoryAttribute("regression")]
-        [NUnit.Framework.TestCaseAttribute("Standard_User", null)]
+        [NUnit.Framework.TestCaseAttribute("standard_user", null)]
         public virtual void Test_1_ConfirmTheUserIsTakenToTheProductsPage(string uSER_NAME, string[] exampleTags)
         {
             string[] @__tags = new string[] {

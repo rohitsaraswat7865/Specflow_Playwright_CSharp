@@ -10,7 +10,7 @@ Scenario Outline:Test_1-Confirm the user is taken to the products page
 	Then Product page is loaded
     Examples:    
 	| USER_NAME     |
-	| Standard_User |
+	| standard_user |
 
 
 @regression
@@ -34,6 +34,6 @@ Scenario Outline:  Test_2-Add 3 items to basket and buy 2 items
 
 	Examples:    
 	| USER_NAME     | PRODUCTS                         | PRODUCT       | FIRST_NAME | LAST_NAME | POSTAL_CODE |
-	| Standard_User | Backpack,Bolt T-Shirt,Bike Light | Bolt T-Shirt  | rohit      | saraswat  | 282007      |
+	| standard_user | Backpack,Bolt T-Shirt,Bike Light | Bolt T-Shirt  | rohit      | saraswat  | 282007      |
 
 	
