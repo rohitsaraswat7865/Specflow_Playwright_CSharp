@@ -1,25 +1,47 @@
-# Specflow_Playwright_C#
+# Playwright Base Framework
 
-1) Open CMD in project root folder i.e. directory within folder "Playwright_BaseFramework" which has the Playwright_BaseFramework.sln (the solution) file. Run following commands in CMD -> 
+This project is a base automation framework using [Playwright](https://playwright.dev/dotnet/) and [SpecFlow](https://specflow.org/) for end-to-end testing of web applications in C#.
 
-2) **dotnet clean**
-3) **dotnet build --property WarningLevel=0**
+## Features
+- SpecFlow for BDD-style test scenarios
+- Playwright for browser automation
+- Page Object Model structure
+- Example feature: SauceDemo
 
-4) Install playwright with dependencies:
-   
-   4.1) Open powershell in Playwright_BaseFramework\bin\Debug\net6.0\ , then run powershell commmand
-   
-   4.2)  **.\playwright.ps1 install**
-   
-5) **dotnet test --filter Category=regression**
-   
-6) Open Playwright Trace Viewer:
-   
-   6.1) Open powershell in Playwright_BaseFramework\bin\Debug\net6.0\ , then run powershell commmand
-   
-   6.2)  **.\playwright.ps1 show-trace**
+## Project Structure
+- `Features/` - Contains feature files and generated code
+- `StepDefinitions/` - Step definition classes for SpecFlow
+- `Support/` - Page objects and support files
+- `bin/`, `obj/` - Build output directories
+- `Playwright_BaseFramework.csproj` - Project file
 
-   6.3) Upload / Select file Ex. C:\logs\PlaywrightLogs\Test_1_OK.zip to view test logs, shapshots in trace viewer.
+## Getting Started
+1. **Install dependencies**
+   - .NET 6 SDK or later
+   - Playwright: `dotnet add package Microsoft.Playwright`
+   - SpecFlow: `dotnet add package SpecFlow`
+   - SpecFlow+Runner: `dotnet add package SpecFlow.Plus.Runner`
+2. **Restore NuGet packages**
+   ```powershell
+   dotnet restore
+   ```
+3. **Run Playwright install** (to download browser binaries)
+   ```powershell
+   pwsh bin\Debug\net6.0\playwright.ps1 install
+   ```
+4. **Run tests**
+   ```powershell
+   dotnet test
+   ```
 
+## Writing Tests
+- Add new feature files in `Features/`
+- Implement step definitions in `StepDefinitions/`
+- Use page objects from `Support/`
 
-   
+## Useful Links
+- [Playwright for .NET Documentation](https://playwright.dev/dotnet/docs/intro)
+- [SpecFlow Documentation](https://docs.specflow.org/projects/specflow/en/latest/)
+
+## License
+MIT
